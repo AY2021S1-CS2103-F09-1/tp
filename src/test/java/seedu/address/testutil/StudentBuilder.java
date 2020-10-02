@@ -3,9 +3,9 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
+import seedu.address.model.student.NusnetId;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
 import seedu.address.model.tag.Tag;
@@ -19,12 +19,12 @@ public class StudentBuilder {
     public static final String DEFAULT_NAME = "Alice Pauline";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "alice@gmail.com";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_NUSNETID = "e0123456";
 
     private Name name;
     private Phone phone;
     private Email email;
-    private Address address;
+    private NusnetId nusnetId;
     private Set<Tag> tags;
 
     /**
@@ -34,7 +34,7 @@ public class StudentBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
-        address = new Address(DEFAULT_ADDRESS);
+        nusnetId = new NusnetId(DEFAULT_NUSNETID);
         tags = new HashSet<>();
     }
 
@@ -45,7 +45,7 @@ public class StudentBuilder {
         name = studentToCopy.getName();
         phone = studentToCopy.getPhone();
         email = studentToCopy.getEmail();
-        address = studentToCopy.getAddress();
+        nusnetId = studentToCopy.getNusnetId();
         tags = new HashSet<>(studentToCopy.getTags());
     }
 
@@ -66,10 +66,10 @@ public class StudentBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code Student} that we are building.
+     * Sets the {@code NusnetId} of the {@code Student} that we are building.
      */
-    public StudentBuilder withAddress(String address) {
-        this.address = new Address(address);
+    public StudentBuilder withNusnetId(String nusnetId) {
+        this.nusnetId = new NusnetId(nusnetId);
         return this;
     }
 
@@ -90,7 +90,7 @@ public class StudentBuilder {
     }
 
     public Student build() {
-        return new Student(name, phone, email, address, tags);
+        return new Student(name, phone, email, nusnetId, tags);
     }
 
 }
