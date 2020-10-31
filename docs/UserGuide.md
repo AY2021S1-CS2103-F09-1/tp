@@ -52,6 +52,12 @@ Adds a student into the student list.
 add n/NAME u/TELEGRAM e/EMAIL i/NUSNETID [t/TAG]...
 ```
 
+### Editing a student: `edit`
+Edits an existing student in the student list.
+```
+edit INDEX [n/NAME] [u/TELEGRAM] [e/EMAIL] [i/NUSNETID] [t/TAG]...
+```
+
 ### Listing all students: `list`
 Shows a list of all students in the student list.
 ```
@@ -129,7 +135,8 @@ exit
 
 | Action            | Format, Examples                                                                                              |
 |-------------------|---------------------------------------------------------------------------------------------------------------|
-| Add student       | ```add n/NAME u/TELEGRAM e/EMAIL i/NUSNETID [t/TAG]``` <br> e.g., ```add n/John Doe u/98765432 e/johnd@example.com```<br>```i/e0123456 t/friends```  |
+| Add student       | ```add n/NAME u/TELEGRAM e/EMAIL i/NUSNETID [t/TAG]...``` <br> e.g., ```add n/John Doe u/98765432 e/johnd@example.com```<br>```i/e0123456 t/weak```  |
+| Edit student      | ```edit INDEX [n/NAME] [u/TELEGRAM] [e/EMAIL] [i/NUSNETID] [t/TAG]...``` <br> e.g., ```edit 1 n/Jon Doe t/good```<br>|
 | List students     | ```list```                                                                                               |
 | Delete student    | ```delete INDEX``` <br> e.g., ```delete 3```                                                             |
 | Add session       | ```session s/SESSION_NAME dt/SESSION_DATE_TIME``` <br> e.g., ```session s/CS2103 Tutorial 1 dt/23-10-2020 0900```|
