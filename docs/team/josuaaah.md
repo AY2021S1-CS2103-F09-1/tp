@@ -67,6 +67,10 @@ session-related commands.
     - Developer Guide:
         - Added implementation details for the `Session` and `SessionList` feature. [#79](https://github.com/AY2021S1-CS2103-F09-1/tp/pull/79)
 
+- **Contribution to team-based tasks:**
+    - Wrote the AboutUs page [#26](https://github.com/AY2021S1-CS2103-F09-1/tp/pull/26)
+    - Updated the README [#35](https://github.com/AY2021S1-CS2103-F09-1/tp/pull/35)
+
 - **Community:**
     - PRs reviewed and [approved](https://github.com/AY2021S1-CS2103-F09-1/tp/pulls?q=is%3Apr+is%3Aclosed+review%3Aapproved)
     - Contributed to forum discussions (Examples: [1](https://github.com/nus-cs2103-AY2021S1/forum/issues/266), 
