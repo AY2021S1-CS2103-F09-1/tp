@@ -1,0 +1,43 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR_T4
+skinparam classBackgroundColor MODEL_COLOR
+
+start
+
+:Call command using 'score';
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([score < 0 or score > 10])
+    :Throw error;
+    stop
+
+
+else ([else])
+    :Truncate to 2 decimal places;
+
+    if () then ([no session or no session selected])
+        :Throw error;
+        stop
+
+    else ([else])
+
+        if () then ([score all])
+            :Get student record list in session;
+            :Filter those who were absent or with no attendance record;
+            :Get the NUSNET IDs of present students in list;
+            :Update score of the each present student in list;
+
+        else ([score individual student])
+            :Get individual record of student;
+            :Update score of individual student;
+
+endif
+
+stop
+@enduml
+
+

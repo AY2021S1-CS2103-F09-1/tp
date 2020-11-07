@@ -133,10 +133,10 @@ Classes used by multiple components are in the `seedu.taskmaster.commons` packag
 
 ## **Additional Features Implemented**
 
-### SessionList
+### Session and SessionList
 
 Author: **Joshua Chew**
-* Implementing the classes that encapsulate a list of tutorial sessions.
+* Implemented the classes that encapsulate a list of tutorial sessions.
 
 ![Structure of the SessionList Component](images/SessionListClassDiagram.png)
 
@@ -165,7 +165,7 @@ Given below is the planned Sequence Diagram for interactions within the `Session
 
 Author: **Goh Siau Chiak**
 
-* Implementing the classes that encapsulate a list of student records.
+* Implemented the classes that encapsulate a list of student records.
 
 ![Structure of StudentRecordList Component](images/StudentRecordDiagram.png)
 
@@ -241,7 +241,7 @@ Design alternatives:
 ### Storage
 
 Author: **Jaya Rengam**
-* Change/Add classes in the Storage package to store data related to Sessions.
+* Changed/Added classes in the Storage package to store data related to Sessions.
 
 ![Structure of the Storage Component](images/NewStorageClassDiagram.png)
 
@@ -266,9 +266,9 @@ Alternative implementations:
 ### ClassParticipation
 
 Author: **Theodore Leebrant**
-* Implementing the class in charge of representing the class participation of each student in a session.
+* Implemented the class in charge of representing the class participation of each student in a session.
 
-![Class Participation](images/ClassParticipation.png)
+![ScoreActivityDiagram](images/ScoreActivityDiagram.png)
 
 The `ClassParticipation` is planned to
 * store a `score` and the maximum score (`maxScore`) attainable
@@ -288,7 +288,7 @@ Given below is the planned Sequence Diagram for interaction to set the class par
 ### UI
 
 Author: **Lim Jin Feng**
-* Change/Add classes in the UI package to display newly implemented functionality such as ClassRecords.
+* Changed/Added classes in the UI package to display newly implemented functionality such as ClassRecords.
 
 ![Structure of the UI Component](images/UpdatedUiClassDiagram.png)
 
@@ -304,7 +304,7 @@ A new method `MainWindow#fillInnerParts2` will change the contents of the Ui to 
 
 Alternative implementations considered:
 * Use FXML's tab feature to display class records
-    * Does not support future expansion when sessions is implemented - there may be an indefinite amount of sessions created.
+    - Does not support future expansion when sessions is implemented - there may be an indefinite amount of sessions created.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -348,9 +348,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | view details of a student         | have quick access to them                                      |
 | `* * *`  | user                                       | view details of all my students   | have quick access to them                                      |
 | `* * *`  | user                                       | mark a student's attendance       |                                                                |
-| `* * *`  | user                                       | mark all students' attendance     | update all attendance records quickly and focus on teaching    |
+| `* *`    | user                                       | mark all students' attendance     | update all attendance records quickly and focus on teaching    |
 | `* * *`  | user                                       | score a student's participation   |                                                                |
-| `* * *`  | user                                       | score all students; participation | update all participation records quickly and focus on teaching |
+| `* *`    | user                                       | score all students' participation | update all participation records quickly and focus on teaching |
 | `* * *`  | user                                       | delete a student                  |                                                                |
 | `* * *`  | user                                       | add a new session                 |                                                                |
 | `* * *`  | user                                       | view details of a session         | have quick access to it                                        |
@@ -545,8 +545,36 @@ Extensions
         Use case resumes at step 1.
 
 
-*{More to be added}*
+**Use Case: Get student with the lowest class participation score**
 
+**MSS**
+1. User requests for the details of the student with the lowest score within a session.
+2. System displays the details of that student.
+
+Extensions
+* 1a. System is not within the context of a session.
+    * 1a1. System shows an error message.
+        Use case ends.
+        
+* 1b. Session has zero students.
+    * 1b1. System shows an empty student list.
+        Use case ends.
+
+
+**Use Case: Get a random student in a session**
+
+**MSS**
+1. User requests for the details of a random student within a session.
+2. System displays the details of that student.
+
+Extensions
+* 1a. System is not within the context of a session.
+    * 1a1. System shows an error message.
+        Use case ends.
+        
+* 1b. Session has zero students.
+    * 1b1. System shows an error message.
+        Use case ends.
 
 
 ### Non-Functional Requirements
@@ -577,6 +605,7 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
+
 ### Launch and shutdown
 
 1. Initial launch
@@ -592,7 +621,6 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
 
 ### Adding a student
 
@@ -611,7 +639,8 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect add commands to try: `add-student`, `add-student Gandalf`, `...`<br>
       Expected: Similar to previous.
-      
+
+
 ### Finding a student
 
 1. Finding a student whose name exists in the student list
@@ -623,7 +652,8 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `find-students`<br>
       Expected: No change to the student list view. Error details shown in the status message.
-      
+
+
 ### Editing a student
 
 1. Editing a student while all students are being shown
@@ -638,6 +668,7 @@ testers are expected to do more *exploratory* testing.
    
    1. Other incorrect delete commands to try: `edit-student`, `edit-student x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
+
 
 ### Deleting a student
 
@@ -670,7 +701,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect add commands to try: `add-session First Session`, `...`<br>
       Expected: Similar to previous.
-   
+
 
 ### Changing the current session view
 
@@ -689,6 +720,107 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect add commands to try: `goto First Session`, `...`<br>
       Expected: Similar to previous.
+
+
+### Marking a student's attendance
+
+1. Marking a student's attendance within a session
+
+    1. Prerequisites: 
+        - Add a session to the session list by running the command `add-session s/First Session dt/23-10-2020 0900`.
+        - Select that session by running the command `goto s/First Session`.
+    
+    1. Test case: `mark 1 a/present`<br>
+       Expected: First student in the student record list of First Session is marked as present.
+       
+    1. Test case: `mark a/present`<br>
+       Expected: Current view does not change. Error details shown in the status message.
+    
+    1. Other incorrect add commands to try: `mark`, `mark 1`, `mark x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+    
+2. Marking a student's attendance when no session is selected
+    
+    1. Prerequisites: List all students using the `list-students` command. Multiple students in the list.
+    
+    1. Test case: `mark 1 a/present`<br>
+       Expected: Current view does not change. Status message informs user to select a session first.
+    
+
+### Marking all students attendances
+
+1. Marking all students attendances within a session
+
+    1. Prerequisites: 
+        - Add a session to the session list by running the command `add-session s/First Session dt/23-10-2020 0900`.
+        - Select that session by running the command `goto s/First Session`.
+    
+    1. Test case: `mark all a/present`<br>
+       Expected: All students in the student record list of First Session are marked as present.
+       
+    1. Test case: `mark all`<br>
+       Expected: Current view does not change. Error details shown in the status message.
+    
+    1. Other incorrect add commands to try: `mark all a/xxxx`<br>
+       Expected: Similar to previous.
+    
+2. Marking a student's attendance when no session is selected
+    
+    1. Prerequisites: List all students using the `list-students` command. Multiple students in the list.
+    
+    1. Test case: `mark all a/present`<br>
+       Expected: Current view does not change. Status message informs user to select a session first.
+
+
+### Awarding a student class participation points
+
+1. Awarding points to a student within a session
+
+    1. Prerequisites: 
+        - Add a session to the session list by running the command `add-session s/First Session dt/23-10-2020 0900`.
+        - Select that session by running the command `goto s/First Session`.
+    
+    1. Test case: `score 1 cp/5`<br>
+       Expected: First student in the student record list of First Session is given a class participation score of 5.0.
+       
+    1. Test case: `score 1 cp/100`<br>
+       Expected: Current view does not change. Status message informs user that the input score should be between 0 and 10 inclusive.
+       
+    1. Test case: `score cp/100`<br>
+       Expected: Current view does not change. Error details shown in the status message.
+    
+    1. Other incorrect add commands to try: `score`<br>
+       Expected: Similar to previous.
+    
+2. Awarding points to a student when no session is selected
+    
+    1. Prerequisites: List all students using the `list-students` command. Multiple students in the list.
+    
+    1. Test case: `score 1 cp/5`<br>
+       Expected: Current view does not change. Status message informs user to select a session first.
+
+
+### Awarding all students class participation points
+
+1. Awarding points to all students within a session
+
+    1. Prerequisites: 
+        - Add a session to the session list by running the command `add-session s/First Session dt/23-10-2020 0900`.
+        - Select that session by running the command `goto s/First Session`.
+        - Mark all students in the session as present by running the command `mark all a/present`.
+    
+    1. Test case: `score all cp/5`<br>
+       Expected: All students in the student record list whose attendance is Present in the session `First Session` is given a class participation score of 5.0.
+       
+    1. Test case: `score all cp/100`<br>
+       Expected: Current view does not change. Status message informs user that the input score should be between 0 and 10 inclusive.
+    
+2. Awarding points to all students when no session is selected
+    
+    1. Prerequisites: List all students using the `list-students` command. Multiple students in the list.
+    
+    1. Test case: `score all cp/5`<br>
+       Expected: Current view does not change. Status message informs user to select a session first.
 
 
 ### Clearing contents of student and session list
